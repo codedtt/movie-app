@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import MovieCard from './MovieCard';
 
 const MovieSearch = () => {
   const [query, setQuery] = useState('');
@@ -52,17 +53,13 @@ const fetchMovie = async () => {
         <button onClick={fetchMovie}>Search</button>
       </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {movie && (
-        <div style={{ border: "1px solid #ccc", padding: "1rem", borderRadius: "8px" }}>
-          <h2>{movie.Title} ({movie.Year})</h2>
-          <img src={movie.Poster} alt={movie.Title} style={{ width: "200px" }} />
-          <p><strong>Plot:</strong> {movie.Plot}</p>
-          <p><strong>Box Office:</strong> {movie.BoxOffice || 'N/A'}</p>
-          <p><strong>IMDb Rating:</strong> {movie.imdbRating}</p>
+        {error && (
+        <div style={{ color: "red", marginTop: "1rem" }}>
+          {error}
         </div>
       )}
+
+       {movie && <MovieCard movie={movie} />}
     </div>
   );
 };
