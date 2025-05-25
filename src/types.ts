@@ -1,7 +1,7 @@
 export interface Movie {
   Title: string;
   Year: string;
-  Plot: string;
+  Plot?: string;
   BoxOffice?: string;
   imdbRating?: string;
   Poster: string;
