@@ -2,6 +2,8 @@
 
 A simple React + TypeScript application to search movies using the OMDb API.
 
+![alt text](image.png)
+
 ## 🔧 Features
 
 - Search movies by title

@@ -1,35 +1,53 @@
-import React from "react";
-import type { Movie } from "../types";
+import React, { useState, useEffect } from 'react';
+import { Play, X } from 'lucide-react';
+import type { Movie } from '../types';
 
 interface MovieCardProps {
   movie: Movie;
+  isTrailerActive: boolean;
+  onWatchTrailer: () => void;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, isTrailerActive, onWatchTrailer }) => {
+  // Extract trailer from Ratings or another source if you have it, here we simulate:
+  // You might want to fetch trailer URL by imdbID or have a youtube URL in your data.
+  // For now, let's just use a dummy youtube trailer URL for demonstration.
+  const trailerUrl = `https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1`;
+
   return (
-    <div className="flex flex-col md:flex-row gap-6 items-center bg-white/10 rounded-2xl shadow-xl p-6 relative">
+    <div className="bg-white/10 rounded-2xl p-6 shadow-lg relative text-white flex flex-col md:flex-row gap-6">
       <img
-        src={movie.Poster !== "N/A" ? movie.Poster : "/no-poster.png"}
+        src={movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450?text=No+Image'}
         alt={movie.Title}
-        className="w-40 h-60 object-cover rounded-xl shadow-lg border-4 border-indigo-400 bg-gray-300"
+        className="w-full md:w-48 rounded-lg object-cover"
       />
-      <div className="flex-1">
-        <h2 className="text-2xl font-bold text-white mb-2">
-          {movie.Title} <span className="text-gray-300 font-normal">({movie.Year})</span>
-        </h2>
-        {movie.Plot && <p className="text-gray-200 mb-2">{movie.Plot}</p>}
-        <div className="flex flex-wrap gap-4 text-gray-200 text-sm">
-          <span>
-            <strong>Box Office:</strong> {movie.BoxOffice ?? "N/A"}
-          </span>
-          <span>
-            <strong>IMDB Rating:</strong> <span className="text-yellow-400">{movie.imdbRating ?? "N/A"}</span>
-          </span>
-          <span>
-            <strong>Genre:</strong> {movie.Genre ?? "N/A"}
-          </span>
-        </div>
+      <div className="flex flex-col flex-1">
+        <h3 className="text-2xl font-bold mb-2">{movie.Title} ({movie.Year})</h3>
+        <p className="mb-2 italic">{movie.Genre}</p>
+        <p className="flex-1 text-sm overflow-auto max-h-48 mb-4">{movie.Plot}</p>
+        <p className="mb-1">IMDB Rating: {movie.imdbRating || 'N/A'}</p>
+        <p className="flex-1 text-sm overflow-auto max-h-48 mb-4">{movie.BoxOffice}</p>
+        <button
+          onClick={onWatchTrailer}
+          className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 rounded px-4 py-2 font-semibold transition w-max"
+        >
+          {isTrailerActive ? <X size={16} /> : <Play size={16} />}
+          {isTrailerActive ? 'Close Trailer' : 'Watch Trailer'}
+        </button>
       </div>
+      {isTrailerActive && (
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-90 rounded-2xl flex items-center justify-center p-4 z-10">
+          <iframe
+            width="100%"
+            height="315"
+            src={trailerUrl}
+            title={`${movie.Title} Trailer`}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 };
