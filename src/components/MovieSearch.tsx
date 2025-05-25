@@ -12,6 +12,7 @@ const MovieSearch = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [activeTrailer, setActiveTrailer] = useState<boolean>(false);
 
   // New state to track which movie trailer is active (showing)
   const [activeTrailerId, setActiveTrailerId] = useState<string | null>(null);
@@ -188,10 +189,8 @@ const MovieSearch = () => {
               <div className="relative">
                 <MovieCard
                   movie={movie}
-                  isTrailerActive={activeTrailerId === movie.imdbID}
-                  onWatchTrailer={() =>
-                    setActiveTrailerId(prev => (prev === movie.imdbID ? null : movie.imdbID))
-                  }
+                  isTrailerActive={activeTrailer}
+                  onWatchTrailer={setActiveTrailer}
                 />
                 <button
                   onClick={toggleFavorite}
