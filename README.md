@@ -64,7 +64,7 @@ npm install
 
 ### 3. Configure environment variables
 
-Create a `.env` file in the root directory and add your API keys:
+Update a `.env` file in the root directory and add your API keys:
 
 ```env
 VITE_OMDB_API_KEY=your_omdb_api_key
