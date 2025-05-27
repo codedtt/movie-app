@@ -48,7 +48,7 @@ const MovieSearch = () => {
     setActiveTrailerId(null);
 
     try {
-      const apiKey = import.meta.env.OMDB_API_KEY;
+      const apiKey = import.meta.env.VITE_OMDB_API_KEY;
       const url = `https://www.omdbapi.com/?t=${encodeURIComponent(query)}&y=${year}&plot=full&apikey=${apiKey}`;
       const res = await axios.get(url);
 

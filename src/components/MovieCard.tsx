@@ -8,7 +8,7 @@ interface MovieCardProps {
   onWatchTrailer: (active: boolean) => void;
 }
 
-const YOUTUBE_API_KEY = import.meta.env.YOUTUBE_API_KEY;
+const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, isTrailerActive, onWatchTrailer }) => {
   const [trailerId, setTrailerId] = useState<string | null>(null);
@@ -32,7 +32,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isTrailerActive, onWatchTr
       )}&key=${YOUTUBE_API_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
-
+      console.log('YouTube response:', data);
       if (data.items?.length) {
         setTrailerId(data.items[0].id.videoId);
       } else {

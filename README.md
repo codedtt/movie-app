@@ -43,7 +43,7 @@ Movie Finder is a modern React + TypeScript application to search and explore mo
 - 🎥 View trailers via YouTube, currently picking the trailer using the Movie Title,year, genre, cast.
 - 📊 Display plot, box office, IMDb rating, and more
 - 🌙 Clean and responsive UI
-- 🎯 Filter by genre and sort by title
+- 🎯 Filter by genre and sort by title, rating or more
 
 ---
 
