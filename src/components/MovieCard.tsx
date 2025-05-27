@@ -32,7 +32,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isTrailerActive, onWatchTr
       )}&key=${YOUTUBE_API_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
-      console.log('YouTube response:', data);
       if (data.items?.length) {
         setTrailerId(data.items[0].id.videoId);
       } else {
