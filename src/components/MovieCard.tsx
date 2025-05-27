@@ -8,7 +8,7 @@ interface MovieCardProps {
   onWatchTrailer: (active: boolean) => void;
 }
 
-const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+const YOUTUBE_API_KEY = import.meta.env.YOUTUBE_API_KEY;
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, isTrailerActive, onWatchTrailer }) => {
   const [trailerId, setTrailerId] = useState<string | null>(null);
